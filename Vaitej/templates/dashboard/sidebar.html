@@ -1,0 +1,113 @@
+<!-- ======================================================
+     DASHBOARD SIDEBAR
+     Shared across Founder / Investor dashboards
+     ====================================================== -->
+
+<aside class="sidebar">
+
+    <!-- =====================
+         LOGO
+         ===================== -->
+    <div class="sidebar-header">
+        <img src="{{ url_for('static', filename='images/vaitej-logo.png') }}"
+             alt="Vaitej Ventures"
+             class="sidebar-logo">
+    </div>
+
+    <!-- =====================
+         NAVIGATION
+         ===================== -->
+    <nav class="sidebar-nav">
+
+        <!-- ==================================================
+             FOUNDER NAVIGATION
+             ================================================== -->
+        {% if session.get('role') == 'founder' %}
+
+            <a href="{{ url_for('founder_home') }}"
+               class="sidebar-link {% if request.path == '/founder/home' %}active{% endif %}">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Home</span>
+            </a>
+
+            <a href="{{ url_for('founder_matches') }}"
+               class="sidebar-link {% if '/founder/matches' in request.path %}active{% endif %}">
+                <span class="nav-icon">🔍</span>
+                <span class="nav-label">Investor Matches</span>
+            </a>
+
+            <a href="{{ url_for('founder_pitch') }}"
+               class="sidebar-link {% if '/founder/pitch' in request.path %}active{% endif %}">
+                <span class="nav-icon">📁</span>
+                <span class="nav-label">Pitch Hub</span>
+            </a>
+
+            <a href="#"
+               class="sidebar-link">
+                <span class="nav-icon">📈</span>
+                <span class="nav-label">Traction</span>
+            </a>
+
+            <a href="#"
+               class="sidebar-link">
+                <span class="nav-icon">💬</span>
+                <span class="nav-label">Messages</span>
+            </a>
+
+            <a href="#"
+               class="sidebar-link">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-label">Profile & Settings</span>
+            </a>
+
+        {% endif %}
+
+        <!-- ==================================================
+             INVESTOR NAVIGATION (FUTURE)
+             ================================================== -->
+        {% if session.get('role') == 'investor' %}
+
+            <a href="#"
+               class="sidebar-link active">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Dashboard</span>
+            </a>
+
+            <a href="#"
+               class="sidebar-link">
+                <span class="nav-icon">🚀</span>
+                <span class="nav-label">Startups</span>
+            </a>
+
+            <a href="#"
+               class="sidebar-link">
+                <span class="nav-icon">⭐</span>
+                <span class="nav-label">Saved</span>
+            </a>
+
+            <a href="#"
+               class="sidebar-link">
+                <span class="nav-icon">💬</span>
+                <span class="nav-label">Messages</span>
+            </a>
+
+            <a href="#"
+               class="sidebar-link">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-label">Settings</span>
+            </a>
+
+        {% endif %}
+
+    </nav>
+
+    <!-- =====================
+         FOOTER
+         ===================== -->
+    <div class="sidebar-footer">
+        <a href="{{ url_for('logout') }}" class="logout-btn">
+            Logout
+        </a>
+    </div>
+
+</aside>

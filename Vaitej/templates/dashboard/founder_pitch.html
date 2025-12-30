@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pitch Hub | Vaitej Ventures</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body class="theme-founder">
+<div class="dashboard-layout">
+
+    {% include "dashboard/sidebar.html" %}
+
+    <main class="dashboard-content">
+
+        <header class="dashboard-header">
+            <h1>Pitch Hub</h1>
+            <p>Your investor-facing pitch materials</p>
+        </header>
+
+        <!-- ===================== PITCH STATUS ===================== -->
+        <section class="metrics-grid">
+
+            <div class="metric-card">
+                <h4>Deck Status</h4>
+                <p class="metric-value">
+                    {{ "Uploaded" if deck else "Missing" }}
+                </p>
+            </div>
+
+            <div class="metric-card">
+                <h4>Pitch Readiness</h4>
+                <p class="metric-value">
+                    {{ deck.deck_score if deck else 0 }}
+                </p>
+                <span class="metric-hint">
+                    {% if deck and deck.deck_score >= 80 %}
+                        Investor-ready
+                    {% elif deck %}
+                        Needs improvement
+                    {% else %}
+                        Upload required
+                    {% endif %}
+                </span>
+            </div>
+
+            <div class="metric-card">
+                <h4>Last Updated</h4>
+                <p class="metric-value">
+                    {{ deck.created_at.strftime("%d %b %Y") if deck else "-" }}
+                </p>
+            </div>
+
+        </section>
+
+        <!-- ===================== UPLOAD ===================== -->
+        <section class="action-panel">
+            <div class="action-card">
+                <h4>Upload Pitch Deck (PDF)</h4>
+
+                <form action="{{ url_for('upload_pitch') }}"
+      method="POST"
+      enctype="multipart/form-data">
+
+    <input type="file" name="pitch_deck" accept=".pdf" required>
+    <button type="submit" class="primary-btn">
+        Upload Pitch Deck
+    </button>
+</form>
+
+            </div>
+        </section>
+
+        <!-- ===================== CHECKLIST ===================== -->
+        <section class="action-panel">
+            <h3>Pitch Readiness Checklist</h3>
+
+            <ul class="activity-list">
+                <li>✔ Problem clearly defined</li>
+                <li>✔ Market size mentioned</li>
+                <li>❌ Traction metrics included</li>
+                <li>✔ Business model explained</li>
+            </ul>
+        </section>
+
+    </main>
+</div>
+</body>
+</html>

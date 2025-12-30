@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Investor Matches | Vaitej Ventures</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body class="theme-founder">
+
+<div class="dashboard-layout">
+
+    {% include "dashboard/sidebar.html" %}
+
+    <main class="dashboard-content">
+
+        <!-- ================= HEADER ================= -->
+        <header class="dashboard-header">
+            <div>
+                <h1>Smart Investor Matches</h1>
+                <p>Ranked investors most aligned with your startup</p>
+            </div>
+
+            <a href="/founder/matches/generate" class="primary-btn">
+                Refresh Matches
+            </a>
+        </header>
+
+        <!-- ================= MATCH GRID ================= -->
+        <section class="matches-grid">
+
+            {% for m in matches %}
+            <div class="match-card">
+
+                <!-- Investor Identity -->
+                <div class="match-header">
+                    <div>
+                        <h3>{{ m.investor_name }}</h3>
+                        <p class="fund-name">{{ m.fund_name }}</p>
+                    </div>
+
+                    {% if m.verification_status == 'verified' %}
+                        <span class="verified-badge">✔ Verified</span>
+                    {% endif %}
+                </div>
+
+                <!-- Match Score -->
+                <div class="match-score">
+                    <span class="
+                        {% if m.match_score >= 85 %}score-high
+                        {% elif m.match_score >= 60 %}score-medium
+                        {% else %}score-low{% endif %}
+                    ">
+                        {{ m.match_score }}% Match
+                    </span>
+                </div>
+
+                <!-- Fit Summary -->
+                <div class="match-meta">
+                    <span>Stage: {{ m.investment_stage }}</span>
+                    <span>Sector: {{ m.sector_focus }}</span>
+                </div>
+
+                <!-- Explainability -->
+                {% if m.ai_reason %}
+                <p class="match-reason">
+                    {{ m.ai_reason }}
+                </p>
+                {% endif %}
+
+                <!-- Actions -->
+                <div class="match-actions">
+                    <a href="/match/{{ m.match_id }}/interested" class="btn-primary">
+                        Express Interest
+                    </a>
+
+                    <a href="/match/{{ m.match_id }}/saved" class="btn-secondary">
+                        Save
+                    </a>
+
+                    <a href="/match/{{ m.match_id }}/declined" class="btn-danger">
+                        Hide
+                    </a>
+                </div>
+
+            </div>
+            {% endfor %}
+
+            {% if not matches %}
+            <p class="empty-state">
+                No matches yet. Improve your profile to unlock investors.
+            </p>
+            {% endif %}
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Founder Dashboard | Vaitej Ventures</title>
+
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body class="theme-founder">
+
+<!-- ======================================================
+     DASHBOARD LAYOUT
+     ====================================================== -->
+<div class="dashboard-layout">
+
+    <!-- ======================================================
+         SHARED SIDEBAR
+         ====================================================== -->
+    {% include "dashboard/sidebar.html" %}
+
+    <!-- ======================================================
+         MAIN DASHBOARD CONTENT
+         ====================================================== -->
+    <main class="dashboard-content">
+
+        <!-- ======================================================
+             HEADER: IDENTITY + FUNDRAISING STATUS
+             ====================================================== -->
+        <header class="dashboard-header">
+            <div>
+                <h1>Welcome back, {{ founder.full_name }} 👋</h1>
+                <p>
+                    {{ founder.company_name }} •
+                    {{ founder.stage | capitalize }}
+                </p>
+            </div>
+
+            <!-- Fundraising Status -->
+            <div class="fundraising-meta">
+                <span class="status-badge">
+                    {{ founder.fundraising_status.replace('_', ' ').title() }}
+                </span>
+
+                {% if weeks_elapsed is not none %}
+                <p class="timeline-text">
+                    {{ weeks_elapsed }} weeks since fundraising started
+                </p>
+                {% endif %}
+            </div>
+        </header>
+
+        <!-- ======================================================
+             METRICS SNAPSHOT
+             ====================================================== -->
+        <section class="metrics-grid">
+
+            <!-- Profile Completion -->
+            <div class="metric-card">
+                <h4>Profile Completion</h4>
+                <p class="metric-value">{{ completion_percent }}%</p>
+                <span class="metric-hint">
+                    {% if completion_percent < 100 %}
+                        Complete your profile to unlock investors
+                    {% else %}
+                        Profile complete
+                    {% endif %}
+                </span>
+            </div>
+
+            <!-- Pitch Readiness -->
+            <div class="metric-card">
+                <h4>Pitch Readiness</h4>
+                <p class="metric-value">{{ pitch_score }}</p>
+                <span class="metric-hint">{{ pitch_label }}</span>
+            </div>
+
+            <!-- Raise Progress -->
+            <div class="metric-card">
+                <h4>Raise Progress</h4>
+                <p class="metric-value">
+                    ₹{{ raise_raised }} / ₹{{ raise_target }}
+                </p>
+                <span class="metric-hint">
+                    {{ raise_percent }}% of target
+                </span>
+            </div>
+
+            <!-- Investor Views -->
+            <div class="metric-card">
+                <h4>Investor Views</h4>
+                <p class="metric-value">{{ recent_views }}</p>
+                <span class="metric-hint">Last 7 days</span>
+
+                <p class="metric-sub">
+                    {{ expressed_interest }} expressed interest
+                </p>
+            </div>
+
+        </section>
+
+        <!-- ======================================================
+             AI INSIGHT
+             ====================================================== -->
+        {% if ai_alert %}
+        <section class="action-panel">
+            <div class="action-card ai-card">
+                <h4>AI Insight</h4>
+                <p>{{ ai_alert }}</p>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- ======================================================
+             RECOMMENDED ACTIONS
+             ====================================================== -->
+        <section class="action-panel">
+            <h3>Recommended Actions</h3>
+
+            <div class="action-cards">
+
+                <!-- Complete Profile -->
+                {% if missing_fields %}
+                <div class="action-card">
+                    <h4>Complete Your Profile</h4>
+                    <p>Missing information:</p>
+
+                    <ul class="missing-list">
+                        {% for field in missing_fields %}
+                            <li>• {{ field }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <a href="#" class="primary-btn">
+                        Complete Profile
+                    </a>
+                </div>
+                {% endif %}
+
+                <!-- Pitch Deck -->
+                <div class="action-card">
+                    <h4>Upload Pitch Deck</h4>
+                    <p>Required to engage investors</p>
+                    <a href="#" class="primary-btn">
+                        Upload Deck
+                    </a>
+                </div>
+
+                <!-- Matches -->
+                <div class="action-card">
+                    <h4>View Investor Matches</h4>
+                    <p>See top investors aligned with your startup</p>
+                    <a href="{{ url_for('founder_matches') }}" class="primary-btn">
+                        View Matches
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ======================================================
+             RECENT ACTIVITY (MVP STATIC)
+             ====================================================== -->
+        <section class="activity-panel">
+            <h3>Recent Activity</h3>
+
+            <ul class="activity-list">
+                <li>🔍 An investor viewed your profile</li>
+                <li>⭐ New investor expressed interest</li>
+                <li>📌 Profile completion reminder</li>
+            </ul>
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
