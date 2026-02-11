@@ -2,11 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <title>Vaitej Ventures</title>
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaitej Ventures | Intelligence Layer for Private Capital</title>
+>>>>>>> 745dc89 (Fixed the entry point)
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
-<body>
+<body class="premium-entry">
 
+<<<<<<< HEAD
 <div class="entry-container">
 
     <!-- TOP BAR -->
@@ -33,5 +42,140 @@
 
 </div>
 
+=======
+<div class="auth-layout">
+    <div class="ambient-light">
+        <div class="light-orb orb-1"></div>
+        <div class="light-orb orb-2"></div>
+        <div class="light-orb orb-3"></div>
+    </div>
+
+    <nav class="top-nav glass">
+        <div class="brand-group" style="display: flex; align-items: center; gap: 12px;">
+             <img src="{{ url_for('static', filename='images/vaitej-logo.png') }}" alt="Vaitej Logo" style="height: 32px; width: auto;">
+             <span class="brand-text" style="font-weight: 800; font-size: 1.25rem;">Vaitej</span>
+        </div>
+        <div class="nav-links">
+            <a href="#benefits" class="nav-item">Benefits</a>
+            <a href="#spotlights" class="nav-item">Ecosystem</a>
+            <a href="{{ url_for('login') }}" class="btn-glass">Member Login</a>
+        </div>
+    </nav>
+
+    <main class="hero-container">
+        <div class="reveal-up">
+            <div class="hero-badge">Next-Gen Founder-Investor Matching</div>
+            <h1 class="entry-title">Precision Capital.<br><span class="text-gradient">Unlimited Vision.</span></h1>
+            <p class="hero-subtitle">The intelligent ecosystem connecting breakthrough founders with high-conviction investors through AI-driven matching and real-time traction analytics.</p>
+        </div>
+
+        <div class="role-grid-container reveal-up">
+            <div class="role-buttons">
+                <a href="{{ url_for('continue_as', role='founder') }}" class="role-card-premium">
+                    <div class="card-glow"></div>
+                    <div class="role-visual"><i data-lucide="rocket"></i></div>
+                    <h3>I'm a Founder</h3>
+                    <p>Build your traction profile, analyze your deck with AI, and meet the right partners.</p>
+                    <span class="card-action">Launch Dashboard <i data-lucide="arrow-right"></i></span>
+                </a>
+
+                <a href="{{ url_for('continue_as', role='investor') }}" class="role-card-premium">
+                    <div class="card-glow"></div>
+                    <div class="role-visual"><i data-lucide="briefcase"></i></div>
+                    <h3>I'm an Investor</h3>
+                    <p>Access curated deal flow, track portfolio health, and deploy capital with data.</p>
+                    <span class="card-action">Enter Dealroom <i data-lucide="arrow-right"></i></span>
+                </a>
+            </div>
+        </div>
+
+        <section id="benefits" class="benefits-section reveal-up">
+            <h2 class="section-tag">Platform Benefits</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item glass">
+                    <div class="benefit-icon"><i data-lucide="shield-check"></i></div>
+                    <h4>Institutional Trust</h4>
+                    <p>Accredited investors and verified founders ensure high-signal networking.</p>
+                </div>
+                <div class="benefit-item glass">
+                    <div class="benefit-icon"><i data-lucide="zap"></i></div>
+                    <h4>90% Faster Matching</h4>
+                    <p>AI eliminates cold-outreach friction by aligning stage, sector, and thesis.</p>
+                </div>
+                <div class="benefit-item glass">
+                    <div class="benefit-icon"><i data-lucide="bar-chart-3"></i></div>
+                    <h4>Zero-Effort Updates</h4>
+                    <p>Founders update metrics once; investors see it live. No more monthly PDFs.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="spotlights" class="spotlight-section reveal-up">
+            <h2 class="section-tag">Featured Capabilities</h2>
+            <div class="spotlight-grid">
+                <div class="spotlight-card glass">
+                    <div class="spotlight-header">
+                        <span class="badge badge-success">Founder Hub</span>
+                        <h3>Build & Raise</h3>
+                    </div>
+                    <ul class="benefit-list">
+                        <li><i data-lucide="check"></i> <strong>AI Pitch Hub:</strong> Get analysis & score instantly.</li>
+                        <li><i data-lucide="check"></i> <strong>Q&A Simulation:</strong> Practice for investor calls.</li>
+                        <li><i data-lucide="check"></i> <strong>Traction Charts:</strong> Auto-generated revenue KPIs.</li>
+                        <li><i data-lucide="check"></i> <strong>Analytics:</strong> See who viewed your profile.</li>
+                    </ul>
+                </div>
+
+                <div class="spotlight-card glass">
+                    <div class="spotlight-header">
+                        <span class="badge badge-neutral">Investor Dealroom</span>
+                        <h3>Source & Deploy</h3>
+                    </div>
+                    <ul class="benefit-list">
+                        <li><i data-lucide="check"></i> <strong>Deal Flow AI:</strong> High-match startups in your inbox.</li>
+                        <li><i data-lucide="check"></i> <strong>Due Diligence:</strong> Secure data-rooms & memos.</li>
+                        <li><i data-lucide="check"></i> <strong>Portfolio MRR:</strong> Aggregated live growth data.</li>
+                        <li><i data-lucide="check"></i> <strong>Direct Access:</strong> One-click connect to founders.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="entry-footer reveal-up">
+            <div class="footer-glass">
+                <p>Ready to redefine your capital journey?</p>
+                <div class="footer-btns">
+                    <a href="{{ url_for('register', role='founder') }}" class="btn-primary">Join as Founder</a>
+                    <a href="{{ url_for('register', role='investor') }}" class="btn-outline">Join as Investor</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Initial Load Animation
+    gsap.from(".hero-container", { opacity: 0, y: 30, duration: 1.2, ease: "power3.out" });
+
+    // Scroll Reveal Logic
+    gsap.utils.toArray('.reveal-up').forEach(elem => {
+        gsap.from(elem, {
+            scrollTrigger: {
+                trigger: elem,
+                start: "top 85%",
+                toggleActions: "play none none none"
+            },
+            y: 40,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out"
+        });
+    });
+</script>
+>>>>>>> 745dc89 (Fixed the entry point)
 </body>
 </html>
